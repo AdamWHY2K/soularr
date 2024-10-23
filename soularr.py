@@ -92,6 +92,7 @@ class Soularr:
         except Exception:
             print(f"{traceback.format_exc()}\n Fatal error! Exiting...")
         finally:
+            print("Soularr finished. Exiting...")
             self.remove_lock_file()
 
     def is_docker(self) -> bool:
@@ -184,9 +185,7 @@ class Soularr:
             failed_downloads (int): The number of failed downloads.
 
         """
-        if failed_downloads == 0:
-            print("Solarr finished. Exiting...")
-        else:
+        if failed_downloads > 0:
             e = (
                 f'{failed_downloads}: releases failed and were removed from wanted list. View "failure_list.txt" for list of failed operations.'
                 if self.remove_wanted_on_failure
